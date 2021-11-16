@@ -24,8 +24,11 @@ public class Vector3DInheritance extends Vector2D {
     @Override
     public double cdot(final IVector iVector) {
         double[] componentsI = iVector.getComponents();
-        double[] components = super.getComponents();
+        double[] components = this.getComponents();
         double temp = 0;
+        if (componentsI.length == 2) {
+            components[2] = 0.0;
+        }
         for (int i = 0; i < components.length; i++) {
             temp += components[i] * componentsI[i];
         }

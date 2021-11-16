@@ -28,7 +28,7 @@ public class Polar2DAdapter implements IVector, IPolar2D {
     }
 
     @Override
-    public double getAngle(){
-        return Math.atan(this.getComponents()[1] / this.getComponents()[0]);
+    public double getAngle() {
+        return Math.toDegrees(Math.atan(this.getComponents()[1] / this.getComponents()[0]));
     }
 }
