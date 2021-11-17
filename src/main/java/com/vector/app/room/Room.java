@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Room {
-    private static double width;
-    private static double height;
+    private double width;
+    private double height;
 }
