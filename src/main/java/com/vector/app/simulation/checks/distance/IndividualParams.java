@@ -9,6 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor(staticName = "of")
 public class IndividualParams {
     private String id;
-    private CheckDistance checkDistance;
+ //   private CheckDistance checkDistance;
     private TimeDistance timeDistance;
 }

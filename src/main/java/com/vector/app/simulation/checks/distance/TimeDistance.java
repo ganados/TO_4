@@ -13,5 +13,5 @@ import lombok.Setter;
 @AllArgsConstructor(staticName = "of")
 public class TimeDistance {
     private Individual first;
-    private Map<String, Double> times;
+    private Map<String, Integer> times;
 }
