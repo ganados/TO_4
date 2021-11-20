@@ -49,9 +49,7 @@ public class Individual {
         this.positionY += components[1];
     }
 
-    public void generatePosition(final Room room) {
-        Random random = new Random();
-
+    public void generatePosition(final Room room, final Random random) {
         double x = random.nextDouble() * MAX_DISTANCE;
         double y = random.nextDouble() * (MAX_DISTANCE - x);
         if (random.nextInt(PROBABILITY_OF_NEGATIVE) == 0) {

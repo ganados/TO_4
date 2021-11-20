@@ -17,30 +17,31 @@ import com.vector.app.simulation.population.Population;
 public class App {
     public static void main(String[] args) {
 
-
         Random random = new Random();
         Room room = new Room(10, 15);
-        Population population = GeneratePopulation.generateNotResistPopulation(50, room);
+        Population population = GeneratePopulation.generateNotResistPopulation(30, room);
         Mementos mementos = new Mementos(new LinkedList<>());
         Controller controller = new Controller();
         int counter = 0;
 
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        f.setSize(400, 400);
+        f.setSize(400, 500);
         f.setLocation(200, 200);
         f.setVisible(true);
-        f.add(new Chart(population.getPopulation().toString()));
+        Chart chart = new Chart(population.getPopulation().toString());
 
         controller.prepareSimulation(population);
         for (; ; ) {
-            f.add(new Chart(population.getPopulation().toString()));
-            f.revalidate();
-            f.repaint();
+
             counter++;
             mementos.addMemento(Memento.of(counter, population));
             for (int i = 0; i < 25; i++) {
                 population.getInfected().forEach(Individual::handle);
+                chart.updateList(population.getPopulation().toString());
+                f.add(chart);
+                f.revalidate();
+                f.repaint();
                 for (int j = 0; j < population.getInfected().size(); j++) {
                     Individual individual = population.getInfected().get(j);
                     individual.clearParams(population);
@@ -55,7 +56,7 @@ public class App {
                         }
                     }
                 }
-                population.getPopulation().forEach(individual1 -> individual1.generatePosition(room));
+                population.getPopulation().forEach(individual1 -> individual1.generatePosition(room, random));
                 population.deleteIfExited();
                 if (counter % 7 == 0) {
                     population.addIndividual(GeneratePopulation.getNotResistIndividual(room));

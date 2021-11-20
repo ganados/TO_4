@@ -2,6 +2,7 @@ package com.vector.app.chart;
 
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 import lombok.AllArgsConstructor;
@@ -12,7 +13,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Chart extends JPanel {
-    private String list;
+    private String string;
+
+    public void updateList(String string) {
+        this.string = string;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -20,7 +25,7 @@ public class Chart extends JPanel {
 
         Graphics2D g2d = (Graphics2D) g;
 
-        StringBuilder individuals = new StringBuilder(getList());
+        StringBuilder individuals = new StringBuilder(getString());
         individuals.deleteCharAt(0);
         individuals.deleteCharAt(individuals.lastIndexOf("]"));
         String[] splitedIndividuals = new String(individuals).split(",");
@@ -28,9 +33,9 @@ public class Chart extends JPanel {
         StringBuilder ills = new StringBuilder();
         StringBuilder healthy = new StringBuilder();
 
-        for (int i = 0; i < splitedIndividuals.length; i++) {
-            String[] strings = splitedIndividuals[i].split("-");
-            if (strings[0].equals("haveSymptoms") || strings[0].equals("haveNotSymptoms")) {
+        for (String splitedIndividual : splitedIndividuals) {
+            String[] strings = splitedIndividual.trim().split("-");
+            if (strings[0].trim().equals("haveSymptoms") || strings[0].trim().equals("haveNotSymptoms")) {
                 ills.append(strings[1]);
                 ills.append("-");
             } else {
@@ -51,21 +56,30 @@ public class Chart extends JPanel {
         }
     }
 
-    private void printPoints(Graphics2D g2d, String[] healthyCords, Color color) {
+    private void printPoints(Graphics2D g2d, String[] tCords, Color color) {
         g2d.setColor(color);
-        int xSize = 5;
-        int ySize = 5;
-        if(color.equals(Color.blue)){
-            xSize = 10;
-            ySize = 11;
+        int xSize = 10;
+        int ySize = 10;
+        if (color.equals(Color.blue)) {
+            xSize = 5;
+            ySize = 5;
         }
-        for (String healthyCord : healthyCords) {
-            String[] cords = healthyCord.split(";");
-            int x = (int) Double.parseDouble(cords[0].split("\\.")[0]);
-            int y = (int) Double.parseDouble(cords[1].split("\\.")[0]);
+        for (String tCord : tCords) {
+            StringBuilder tCordsBuilder = new StringBuilder(tCord);
+            if (tCordsBuilder.lastIndexOf("E") != -1) {
+                tCordsBuilder.deleteCharAt(tCordsBuilder.lastIndexOf("E"));
+            }
+            tCord = new String(tCordsBuilder);
+            String[] cords = tCord.split(";");
 
-            g2d.drawOval(x * 20, y * 30, xSize, ySize);
-            g2d.fillOval(x * 20, y * 30, xSize, ySize);
+
+            double x = Double.parseDouble(cords[0]);
+            double y = 0;
+            if (cords.length == 2) {
+                y = Double.parseDouble(cords[1]);
+            }
+            Ellipse2D.Double shape = new Ellipse2D.Double(x * 20, y * 30, xSize, ySize);
+            g2d.draw(shape);
         }
     }
 }
