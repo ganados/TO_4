@@ -1,11 +1,14 @@
 package com.vector.app.simulation.generator;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
 import com.vector.app.individual.Ids;
 import com.vector.app.individual.Individual;
+import com.vector.app.room.Room;
+import com.vector.app.simulation.checks.IndividualParams;
 import com.vector.app.simulation.population.Population;
 import com.vector.app.states.IState;
 import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;
@@ -13,59 +16,71 @@ import com.vector.app.states.havesymptoms.HaveSymptoms;
 import com.vector.app.states.healthy.Healthy;
 import com.vector.app.states.resist.Resist;
 
+import static com.vector.app.states.Constants.PROBABILITY_OF_ENTRY;
+import static com.vector.app.states.Constants.PROBABILITY_OF_ILL;
+import static com.vector.app.states.Constants.PROBABILITY_OF_RESIST;
+import static com.vector.app.states.Constants.PROBABILITY_OF_SYMPTOMS;
+
 public class GeneratePopulation {
-    private static final int PROBABILITY_OF_ILL = 10;
-    private static final int PROBABILITY_OF_RESIST = 2;
-    private static final int PROBABILITY_OF_SYMPTOMS = 2;
+
 
     private static final Random random = new Random();
 
-    public static Population generateNotResistPopulation(final int numerous) {
+    public static Population generateNotResistPopulation(final int numerous, final Room room) {
         List<Individual> individuals = new ArrayList<>();
-        IState iState;
         for (int i = 0; i < numerous; i++) {
-            individuals.add(getNotResistIndividual());
+            individuals.add(getNotResistIndividual(room));
         }
         return Population.of(individuals);
     }
 
-    public static Individual getNotResistIndividual() {
+    public static Individual getNotResistIndividual(final Room room) {
         IState iState;
-        if(random.nextInt(PROBABILITY_OF_ILL) == 0){
+        if (random.nextInt(PROBABILITY_OF_ILL) != 0) {
             iState = new Healthy();
-        }
-        else if(random.nextInt(PROBABILITY_OF_SYMPTOMS) == 0) {
+        } else if (random.nextInt(PROBABILITY_OF_SYMPTOMS) == 0) {
             iState = new HaveSymptoms();
-        }
-        else {
+        } else {
             iState = new HaveNotSymptoms();
         }
-        return Individual.of(Ids.createID(), iState, true, 0, 0);
+
+        return getIndividual(room, iState);
     }
 
-    public static Population generateResistPopulation(final int numerous) {
+    public static Population generateResistPopulation(final int numerous, final Room room) {
         List<Individual> individuals = new ArrayList<>();
         for (int i = 0; i < numerous; i++) {
-            individuals.add(generateIndividual());
+            individuals.add(generateResistIndividual(room));
         }
         return Population.of(individuals);
     }
 
-    public static Individual generateIndividual() {
+    public static Individual generateResistIndividual(final Room room) {
         IState iState;
-        if(random.nextInt(PROBABILITY_OF_RESIST) == 0) {
+        if (random.nextInt(PROBABILITY_OF_RESIST) == 0) {
             iState = new Resist();
-        }
-        else if(random.nextInt(PROBABILITY_OF_ILL) == 0){
+        } else if (random.nextInt(PROBABILITY_OF_ILL) == 0) {
             iState = new Healthy();
-        }
-        else if(random.nextInt(PROBABILITY_OF_SYMPTOMS) == 0) {
+        } else if (random.nextInt(PROBABILITY_OF_SYMPTOMS) == 0) {
             iState = new HaveSymptoms();
-        }
-        else {
+        } else {
             iState = new HaveNotSymptoms();
         }
-        return Individual.of(Ids.createID(), iState, true, 0, 0);
-        // TODO: poprawic generowanie
+        return getIndividual(room, iState);
+    }
+
+    private static Individual getIndividual(final Room room, final IState iState) {
+        double x = 0;
+        double y = 0;
+        if(random.nextInt(PROBABILITY_OF_ENTRY) == 0) {
+            x = random.nextDouble() * room.getWidth();
+        }
+        else {
+            y = random.nextDouble() * room.getHeight();
+        }
+        LinkedHashMap<String, Double> distances = new LinkedHashMap<>();
+        LinkedHashMap<String, Integer> times = new LinkedHashMap<>();
+        IndividualParams individualParams = IndividualParams.of(distances, times);
+        return Individual.of(Ids.createID(), iState, individualParams,true, x, y);
     }
 }

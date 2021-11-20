@@ -13,17 +13,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor(staticName = "of")
 public class Memento {
-    private static final LocalTime localTime = LocalTime.now();
+    private int counter;
     private Population population;
-
-    public String getTime() {
-        return localTime.toString();
-    }
 
     @Override
     public String toString(){
         for(Individual individual : population.getPopulation()){
-            System.out.println(localTime);
+            System.out.println(counter);
             System.out.println(individual.toString());
         }
         return "";
