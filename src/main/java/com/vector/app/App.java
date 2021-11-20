@@ -3,7 +3,9 @@ package com.vector.app;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Random;
+import javax.swing.JFrame;
 
+import com.vector.app.chart.Chart;
 import com.vector.app.individual.Individual;
 import com.vector.app.memento.multi.Mementos;
 import com.vector.app.memento.single.Memento;
@@ -14,15 +16,27 @@ import com.vector.app.simulation.population.Population;
 
 public class App {
     public static void main(String[] args) {
+
+
         Random random = new Random();
         Room room = new Room(10, 15);
-        Population population = GeneratePopulation.generateNotResistPopulation(20, room);
+        Population population = GeneratePopulation.generateNotResistPopulation(50, room);
         Mementos mementos = new Mementos(new LinkedList<>());
         Controller controller = new Controller();
         int counter = 0;
-        //here
+
+        JFrame f = new JFrame();
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setSize(400, 400);
+        f.setLocation(200, 200);
+        f.setVisible(true);
+        f.add(new Chart(population.getPopulation().toString()));
+
         controller.prepareSimulation(population);
         for (; ; ) {
+            f.add(new Chart(population.getPopulation().toString()));
+            f.revalidate();
+            f.repaint();
             counter++;
             mementos.addMemento(Memento.of(counter, population));
             for (int i = 0; i < 25; i++) {
@@ -40,11 +54,6 @@ public class App {
                             population.getIndividual(key).handle(individual);
                         }
                     }
-//                    individual.getIndividualParams().getDistances().entrySet().forEach(System.out::println);
-//                    times.entrySet().forEach(System.out::println);
-                    // TODO: sprawdzanie czy czas >= 75, zmiana stanu,
-
-                    // TODO: mozliwe przeniesienie metod getDistances, getTimes do controllera, zarazanie sie,
                 }
                 population.getPopulation().forEach(individual1 -> individual1.generatePosition(room));
                 population.deleteIfExited();

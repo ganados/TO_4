@@ -72,16 +72,14 @@ public class GeneratePopulation {
     private static Individual getIndividual(final Room room, final IState iState) {
         double x = 0;
         double y = 0;
-        if(random.nextInt(PROBABILITY_OF_ENTRY) == 0) {
+        if (random.nextInt(PROBABILITY_OF_ENTRY) == 0) {
             x = random.nextDouble() * room.getWidth();
-        }
-        else {
+        } else {
             y = random.nextDouble() * room.getHeight();
         }
         LinkedHashMap<String, Double> distances = new LinkedHashMap<>();
         LinkedHashMap<String, Integer> times = new LinkedHashMap<>();
         IndividualParams individualParams = IndividualParams.of(distances, times);
-        return Individual.of(Ids.createID(), iState, individualParams,true, x, y);
-//        return Individual.of(Ids.createID(), iState, individualParams,true, 0, 0);
+        return Individual.of(Ids.createID(), iState, individualParams, true, x, y);
     }
 }

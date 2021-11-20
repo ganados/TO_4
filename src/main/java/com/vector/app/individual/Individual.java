@@ -1,7 +1,5 @@
 package com.vector.app.individual;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -19,7 +17,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import static com.vector.app.states.Constants.MAX_DISTANCE;
 import static com.vector.app.states.Constants.PROBABILITY_OF_INFECT;
@@ -29,7 +26,6 @@ import static com.vector.app.states.Constants.PROBABILITY_OF_RETURN;
 @Setter
 @Getter
 @Builder
-@ToString
 @AllArgsConstructor(staticName = "of")
 public class Individual {
 
@@ -41,6 +37,11 @@ public class Individual {
 
     private double positionX;
     private double positionY;
+
+    @Override
+    public String toString() {
+        return state.getName() + "-" + positionX + ";" + positionY;
+    }
 
     public void setPosition(final IVector iVector) {
         double[] components = iVector.getComponents();
@@ -100,12 +101,11 @@ public class Individual {
     }
 
     public void handle(final Individual individual) {
-        if(individual.getState().equals(new HaveNotSymptoms())) {
+        if (individual.getState().equals(new HaveNotSymptoms())) {
             if (new Random().nextInt(PROBABILITY_OF_INFECT) == 0) {
                 this.handle();
             }
-        }
-        else {
+        } else {
             this.handle();
         }
     }
