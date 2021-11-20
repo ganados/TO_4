@@ -82,5 +82,6 @@ public class GeneratePopulation {
         LinkedHashMap<String, Integer> times = new LinkedHashMap<>();
         IndividualParams individualParams = IndividualParams.of(distances, times);
         return Individual.of(Ids.createID(), iState, individualParams,true, x, y);
+//        return Individual.of(Ids.createID(), iState, individualParams,true, 0, 0);
     }
 }

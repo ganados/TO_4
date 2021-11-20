@@ -1,13 +1,17 @@
 package com.vector.app.individual;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
 import com.vector.app.room.Room;
 import com.vector.app.simulation.checks.IndividualParams;
+import com.vector.app.simulation.population.Population;
 import com.vector.app.states.IState;
+import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;
 import com.vector.app.vector.Vector2D;
 import com.vector.app.vector.interfaces.IVector;
 
@@ -18,6 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import static com.vector.app.states.Constants.MAX_DISTANCE;
+import static com.vector.app.states.Constants.PROBABILITY_OF_INFECT;
 import static com.vector.app.states.Constants.PROBABILITY_OF_NEGATIVE;
 import static com.vector.app.states.Constants.PROBABILITY_OF_RETURN;
 
@@ -94,26 +99,38 @@ public class Individual {
         this.state.handle(this);
     }
 
+    public void handle(final Individual individual) {
+        if(individual.getState().equals(new HaveNotSymptoms())) {
+            if (new Random().nextInt(PROBABILITY_OF_INFECT) == 0) {
+                this.handle();
+            }
+        }
+        else {
+            this.handle();
+        }
+    }
+
     public double getDistance(final Individual individual) {
         return Math.sqrt(Math.pow(individual.getPositionX() - this.getPositionX(), 2) + Math.pow(individual.getPositionY() - this.getPositionY(), 2));
     }
 
-    public LinkedHashMap<String, Double> getDistances(final List<Individual> individuals) {
-        LinkedHashMap<String, Double> distances = new LinkedHashMap<>();
+    public Map<String, Double> getDistances(final List<Individual> individuals) {
+        Map<String, Double> distances = individualParams.getDistances();
         for (Individual individual : individuals) {
             distances.put(individual.getId(), this.getDistance(individual));
         }
         return distances;
     }
 
-    public LinkedHashMap<String, Integer> getTimes(final List<Individual> individuals, final LinkedHashMap<String, Double> distances) {
-        LinkedHashMap<String, Integer> times = new LinkedHashMap<>();
+    public Map<String, Integer> getTimes(final List<Individual> individuals) {
+        Map<String, Integer> times = individualParams.getTimes();
+        Map<String, Double> distances = individualParams.getDistances();
         for (Individual individual : individuals) {
             if (times.get(individual.getId()) == null) {
                 times.put(individual.getId(), 0);
             } else if (distances.get(individual.getId()) <= 2) {
                 int currentTime = times.get(individual.getId());
-                times.put(individual.getId(), currentTime++);
+                times.put(individual.getId(), ++currentTime);
             } else {
                 times.put(individual.getId(), 0);
             }
@@ -121,10 +138,11 @@ public class Individual {
         return times;
     }
 
-    public void infect(final List<Individual> individuals, final LinkedHashMap<String, Double> times) {
-        for(Individual individual : individuals) {
-
-        }
+    public void clearParams(final Population population) {
+        Map<String, Integer> times = getIndividualParams().getTimes();
+        Map<String, Double> distances = getIndividualParams().getDistances();
+        times.keySet().removeIf(s -> population.getIndividual(s) == null);
+        distances.keySet().removeIf(s -> population.getIndividual(s) == null);
     }
 
     @Override

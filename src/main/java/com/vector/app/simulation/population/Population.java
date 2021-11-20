@@ -1,5 +1,6 @@
 package com.vector.app.simulation.population;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,11 +39,7 @@ public class Population {
     }
 
     public void deleteIfExited() {
-        for (int i = 0; i < this.population.size(); i++) {
-            if (!population.get(i).getIsInRoom()) {
-                this.population.remove(i);
-            }
-        }
+        population.removeIf(individual -> !individual.getIsInRoom());
     }
 
     public List<Individual> getInfected() {
