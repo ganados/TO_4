@@ -3,7 +3,7 @@ package com.vector.app.simulation.population;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.vector.app.individual.Individual;
+import com.vector.app.simulation.individual.Individual;
 import com.vector.app.states.IState;
 import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;
 import com.vector.app.states.havesymptoms.HaveSymptoms;
@@ -12,10 +12,8 @@ import com.vector.app.states.resist.Resist;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
 @AllArgsConstructor(staticName = "of")
 public class Population {
     private List<Individual> population;
@@ -24,8 +22,8 @@ public class Population {
         this.population.add(individual);
     }
 
-    public void addIndividuals(final List<Individual> individuals) {
-        this.population.addAll(individuals);
+    public void setPopulation(List<Individual> individuals) {
+        this.population = individuals;
     }
 
     public Individual getIndividual(final String id) {

@@ -2,7 +2,7 @@ package com.vector.app.states.resist;
 
 import java.util.Objects;
 
-import com.vector.app.individual.Individual;
+import com.vector.app.simulation.individual.Individual;
 import com.vector.app.states.IState;
 
 public class Resist implements IState {

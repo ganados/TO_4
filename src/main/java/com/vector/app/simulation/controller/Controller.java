@@ -1,12 +1,11 @@
 package com.vector.app.simulation.controller;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.vector.app.individual.Individual;
-import com.vector.app.simulation.checks.IndividualParams;
+import com.vector.app.simulation.individual.Individual;
+import com.vector.app.simulation.individualParams.IndividualParams;
 import com.vector.app.simulation.population.Population;
 
 import lombok.Getter;

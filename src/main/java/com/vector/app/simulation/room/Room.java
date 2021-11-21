@@ -1,4 +1,4 @@
-package com.vector.app.room;
+package com.vector.app.simulation.room;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

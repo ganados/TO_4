@@ -1,8 +1,9 @@
 package com.vector.app.memento.multi;
 
-import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import com.vector.app.memento.single.Memento;
+import com.vector.app.simulation.individual.Individual;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,18 +11,13 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class Mementos {
-    private LinkedList<Memento> mementos;
+    private Map<Integer, List<Individual>> mementos;
 
-    public void addMemento(final Memento memento) {
-        this.mementos.add(memento);
+    public void addMemento(final int position, List<Individual> individuals) {
+        this.mementos.put(position, individuals);
     }
 
-    public Memento getMemento(final int position) {
-        for (Memento memento : mementos) {
-            if (memento.getCounter() == position) {
-                return memento;
-            }
-        }
-        return null;
+    public List<Individual> getMemento(final int position) {
+        return mementos.get(position);
     }
 }

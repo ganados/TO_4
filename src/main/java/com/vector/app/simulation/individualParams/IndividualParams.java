@@ -1,4 +1,4 @@
-package com.vector.app.simulation.checks;
+package com.vector.app.simulation.individualParams;
 
 import java.util.Map;
 
@@ -12,12 +12,4 @@ import lombok.Setter;
 public class IndividualParams {
     private Map<String, Double> distances;
     private Map<String, Integer> times;
-
-    public double getIndividualDistance(final String id) {
-        return distances.get(id);
-    }
-
-    public double getIndividualTime(final String id) {
-        return times.get(id);
-    }
 }

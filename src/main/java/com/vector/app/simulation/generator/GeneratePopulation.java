@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
 
-import com.vector.app.individual.Ids;
-import com.vector.app.individual.Individual;
-import com.vector.app.room.Room;
-import com.vector.app.simulation.checks.IndividualParams;
+import com.vector.app.simulation.individual.Ids;
+import com.vector.app.simulation.individual.Individual;
+import com.vector.app.simulation.room.Room;
+import com.vector.app.simulation.individualParams.IndividualParams;
 import com.vector.app.simulation.population.Population;
 import com.vector.app.states.IState;
 import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;

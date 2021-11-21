@@ -1,13 +1,13 @@
-package com.vector.app.individual;
+package com.vector.app.simulation.individual;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 
-import com.vector.app.room.Room;
-import com.vector.app.simulation.checks.IndividualParams;
+import com.vector.app.simulation.individualParams.IndividualParams;
 import com.vector.app.simulation.population.Population;
+import com.vector.app.simulation.room.Room;
 import com.vector.app.states.IState;
 import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;
 import com.vector.app.vector.Vector2D;
@@ -52,7 +52,7 @@ public class Individual {
     public void generatePosition(final Room room, final Random random) {
         double x = random.nextDouble() * MAX_DISTANCE;
         double y = random.nextDouble() * (MAX_DISTANCE - x);
-        if (random.nextInt(PROBABILITY_OF_NEGATIVE) == 0) {
+        if (random.nextInt(PROBABILITY_OF_NEGATIVE) < 2) {
             x *= -1;
             y *= -1;
         }

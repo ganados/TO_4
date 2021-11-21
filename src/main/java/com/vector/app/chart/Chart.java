@@ -3,6 +3,7 @@ package com.vector.app.chart;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.util.Objects;
 import javax.swing.JPanel;
 
 import lombok.AllArgsConstructor;
@@ -72,13 +73,15 @@ public class Chart extends JPanel {
             tCord = new String(tCordsBuilder);
             String[] cords = tCord.split(";");
 
-
-            double x = Double.parseDouble(cords[0]);
+            double x = 0;
+            if (!Objects.equals(cords[0], "")) {
+                x = Double.parseDouble(cords[0]);
+            }
             double y = 0;
             if (cords.length == 2) {
                 y = Double.parseDouble(cords[1]);
             }
-            Ellipse2D.Double shape = new Ellipse2D.Double(x * 20, y * 30, xSize, ySize);
+            Ellipse2D.Double shape = new Ellipse2D.Double(x * 20, y * 20, xSize, ySize);
             g2d.draw(shape);
         }
     }

@@ -1,4 +1,4 @@
-package com.vector.app.individual;
+package com.vector.app.simulation.individual;
 
 public class Ids {
     private static long idCounter = 0;

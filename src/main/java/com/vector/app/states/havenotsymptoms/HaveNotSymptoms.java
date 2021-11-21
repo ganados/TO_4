@@ -3,7 +3,7 @@ package com.vector.app.states.havenotsymptoms;
 import java.util.Objects;
 import java.util.Random;
 
-import com.vector.app.individual.Individual;
+import com.vector.app.simulation.individual.Individual;
 import com.vector.app.states.IState;
 import com.vector.app.states.resist.Resist;
 
