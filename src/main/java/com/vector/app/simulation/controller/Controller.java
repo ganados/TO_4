@@ -15,7 +15,6 @@ import lombok.Setter;
 @Getter
 public class Controller {
 
-
     public void prepareSimulation(final Population population) {
         for (int j = 0; j < population.getInfected().size(); j++) {
             Individual individual = population.getInfected().get(j);
@@ -26,4 +25,5 @@ public class Controller {
             individual.setIndividualParams(IndividualParams.of(distances, times));
         }
     }
+
 }

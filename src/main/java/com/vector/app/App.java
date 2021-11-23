@@ -29,15 +29,16 @@ public class App {
         f.setSize(1000, 700);
         f.setLocation(800, 50);
         f.setVisible(true);
+
         Chart chart = new Chart(population.getPopulation().toString());
 
         controller.prepareSimulation(population);
         int counter = 0;
         for (; ; ) {
 //            if (counter == 100) {
-//                population.setPopulation(mementos.getMemento(1));
+//                population.setPopulation(mementos.getMemento(0));
 //            }
-            mementos.addMemento(counter, new ArrayList<>(population.getPopulation()));
+            mementos.addMemento(counter, new ArrayList<>(population.getPopulationCopy()));
             for (int i = 0; i < 25; i++) {
 
                 population.getInfected().forEach(Individual::handle);

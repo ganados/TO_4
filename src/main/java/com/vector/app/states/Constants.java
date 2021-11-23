@@ -8,6 +8,6 @@ public class Constants {
     public static final int PROBABILITY_OF_SYMPTOMS = 2;
     public static final int PROBABILITY_OF_ENTRY = 2;
     public static final int PROBABILITY_OF_RETURN = 2;
-    public static final int PROBABILITY_OF_NEGATIVE = 5;
+    public static final int PROBABILITY_OF_NEGATIVE = 100;
     public static final double MAX_DISTANCE = 0.1;
 }

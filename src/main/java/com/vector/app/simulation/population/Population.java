@@ -2,6 +2,7 @@ package com.vector.app.simulation.population;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.vector.app.simulation.individual.Individual;
 import com.vector.app.states.IState;
@@ -17,6 +18,10 @@ import lombok.Getter;
 @AllArgsConstructor(staticName = "of")
 public class Population {
     private List<Individual> population;
+
+    public List<Individual> getPopulationCopy(){
+        return population.stream().map(Individual::getIndividual).collect(Collectors.toList());
+    }
 
     public void addIndividual(final Individual individual) {
         this.population.add(individual);

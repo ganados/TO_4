@@ -43,6 +43,10 @@ public class Individual {
         return state.getName() + "-" + positionX + ";" + positionY;
     }
 
+    public Individual getIndividual() {
+        return Individual.of(id, state, individualParams.getIndividualParams(), isInRoom, positionX, positionY);
+    }
+
     public void setPosition(final IVector iVector) {
         double[] components = iVector.getComponents();
         this.positionX += components[0];
@@ -52,7 +56,7 @@ public class Individual {
     public void generatePosition(final Room room, final Random random) {
         double x = random.nextDouble() * MAX_DISTANCE;
         double y = random.nextDouble() * (MAX_DISTANCE - x);
-        if (random.nextInt(PROBABILITY_OF_NEGATIVE) < 2) {
+        if (random.nextInt(PROBABILITY_OF_NEGATIVE) < 45) {
             x *= -1;
             y *= -1;
         }
