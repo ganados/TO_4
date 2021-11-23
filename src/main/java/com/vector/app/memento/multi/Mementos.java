@@ -20,4 +20,8 @@ public class Mementos {
     public List<Individual> getMemento(final int position) {
         return mementos.get(position);
     }
+
+    public String[] getIndexes() {
+        return mementos.keySet().stream().map(Object::toString).toArray(String[]::new);
+    }
 }
