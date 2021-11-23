@@ -40,8 +40,10 @@ public class Chart extends JPanel {
                 ills.append(strings[1]);
                 ills.append("-");
             } else {
-                healthy.append(strings[1]);
-                healthy.append("-");
+                if (!strings[0].equals("")) {
+                    healthy.append(strings[1]);
+                    healthy.append("-");
+                }
             }
         }
 

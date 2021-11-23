@@ -19,7 +19,7 @@ import lombok.Getter;
 public class Population {
     private List<Individual> population;
 
-    public List<Individual> getPopulationCopy(){
+    public List<Individual> getPopulationCopy() {
         return population.stream().map(Individual::getIndividual).collect(Collectors.toList());
     }
 

@@ -1,5 +1,6 @@
 package com.vector.app.memento.multi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,10 @@ public class Mementos {
 
     public List<Individual> getMemento(final int position) {
         return mementos.get(position);
+    }
+
+    public List<Individual> getMementoCopy(final int position) {
+        return new ArrayList<>(mementos.get(position));
     }
 
     public String[] getIndexes() {

@@ -3,8 +3,6 @@ package com.vector.app.simulation.individualParams;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.vector.app.simulation.individual.Individual;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

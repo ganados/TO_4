@@ -12,7 +12,7 @@ public class App {
     public static void main(String[] args) {
 
         Room room = new Room(40, 30);
-        Population population = GeneratePopulation.generateNotResistPopulation(500, room);
+        Population population = GeneratePopulation.generateResistPopulation(500, room);
         Mementos mementos = new Mementos(new HashMap<>());
 
         Controller controller = Controller.builder()

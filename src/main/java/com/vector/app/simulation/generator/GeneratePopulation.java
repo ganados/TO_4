@@ -7,9 +7,9 @@ import java.util.Random;
 
 import com.vector.app.simulation.individual.Ids;
 import com.vector.app.simulation.individual.Individual;
-import com.vector.app.simulation.room.Room;
 import com.vector.app.simulation.individualParams.IndividualParams;
 import com.vector.app.simulation.population.Population;
+import com.vector.app.simulation.room.Room;
 import com.vector.app.states.IState;
 import com.vector.app.states.havenotsymptoms.HaveNotSymptoms;
 import com.vector.app.states.havesymptoms.HaveSymptoms;

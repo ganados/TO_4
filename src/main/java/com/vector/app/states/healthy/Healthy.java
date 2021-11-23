@@ -16,7 +16,7 @@ public class Healthy implements IState {
 
     @Override
     public void handle(final Individual individual) {
-        if (!individual.getState().equals(new HaveNotSymptoms()) || !individual.getState().equals(new HaveNotSymptoms())) {
+        if (!individual.getState().equals(new HaveSymptoms()) || !individual.getState().equals(new HaveNotSymptoms())) {
             if (new Random().nextInt(PROBABILITY_OF_SYMPTOMS) == 0) {
                 individual.setState(new HaveSymptoms());
             } else {

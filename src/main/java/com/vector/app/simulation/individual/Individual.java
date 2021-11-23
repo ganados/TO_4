@@ -61,8 +61,7 @@ public class Individual {
             y *= -1;
         }
 
-        IVector iVector = new Vector2D(x, y);
-        this.setPosition(iVector);
+        this.setPosition(new Vector2D(x, y));
         if (getPositionX() > room.getWidth()) {
             if (random.nextInt(PROBABILITY_OF_RETURN) == 0) {
                 this.setPositionX(getPositionX() - 1);

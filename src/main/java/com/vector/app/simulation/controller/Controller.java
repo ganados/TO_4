@@ -56,8 +56,8 @@ public class Controller extends JFrame {
                 for (int j = 0; j < population.getInfected().size(); j++) {
                     Individual individual = population.getInfected().get(j);
                     individual.clearParams(population);
-                    individual.getDistances(population.getNotInfected());
-                    individual.getTimes(population.getNotInfected());
+                    individual.getDistances(population.getPossibleInfected());
+                    individual.getTimes(population.getPossibleInfected());
 
                     Map<String, Integer> times = individual.getIndividualParams().getTimes();
 
@@ -83,9 +83,9 @@ public class Controller extends JFrame {
             if (counter == 10000) {
                 break;
             }
-            if (population.getInfected().size() == 0) {
-                break;
-            }
+//            if (population.getInfected().size() == 0) {
+//                break;
+//            }
             counter++;
         }
         population.getPopulation().forEach(System.out::println);
@@ -165,7 +165,7 @@ public class Controller extends JFrame {
             } catch (NumberFormatException e) {
                 System.out.println("Illegal arg");
             }
-            population.setPopulation(mementos.getMemento(pos));
+            population.setPopulation(mementos.getMementoCopy(pos));
             System.out.println("Step " + pos + " successfully loaded.");
         }
     }
