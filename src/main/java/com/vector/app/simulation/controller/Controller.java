@@ -41,7 +41,7 @@ public class Controller extends JFrame {
         Random random = new Random();
         preparePopulation(population);
         Chart chart = new Chart(population.getPopulation().toString());
-
+        mementos.addMemento(counter, population.getPopulationCopy());
         prepareChart();
 
         for (; ; ) {
@@ -152,6 +152,7 @@ public class Controller extends JFrame {
         public void actionPerformed(ActionEvent event) {
             mementos.addMemento(counter, new ArrayList<>(population.getPopulationCopy()));
             addToComboBox(mementos.getIndexes());
+            System.out.println("Step " + counter + " successfully saved.");
         }
     }
 
@@ -165,6 +166,7 @@ public class Controller extends JFrame {
                 System.out.println("Illegal arg");
             }
             population.setPopulation(mementos.getMemento(pos));
+            System.out.println("Step " + pos + " successfully loaded.");
         }
     }
 }
